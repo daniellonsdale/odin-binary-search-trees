@@ -37,6 +37,40 @@ function insert(root, value){
     return root;
 }
 
+function deleteItem(root, value){
+    if (root == null){
+        return root;
+    }
+
+    if (value < root.data){
+        root.left = deleteItem(root.left, value);
+    }else if (value > root.data){
+        root.right = deleteItem(root.right, value);
+    }else{
+        if (root.right == null){
+            return root.left;
+        }else if (root.left == null){
+            return root.right;
+        }else{
+            let succ = getSuccessor(root);
+            root.data = succ.data;
+            root.right = deleteItem(root.right, succ.data);
+        }
+    }
+
+    return root;
+}
+
+function getSuccessor(root){
+    root = root.right;
+
+    while(root !== null && root.left !== null){
+        root = root.left;
+    }
+
+    return root;
+}
+
 function removeDuplicates(arr){
     let newArr = [];
     for (let i = 0; i < arr.length; i++) {
@@ -77,5 +111,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]));
 console.log(testArray);
 let testRoot = buildTree(testArray, 0, testArray.length-1);
-testRoot = insert(testRoot, 3);
+testRoot = deleteItem(testRoot, 67);
 prettyPrint(testRoot);
