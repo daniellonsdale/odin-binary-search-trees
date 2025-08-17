@@ -21,6 +21,22 @@ function buildTree(arr, start, end){
     return root;
 }
 
+function insert(root, value){
+    if (root == null){
+        return new Node(value);
+    }else if (root.data == value){
+        return root;
+    }
+
+    if (value > root.data){
+        root.right = insert(root.right, value);
+    }else if (value < root.data){
+        root.left = insert(root.left, value);
+    }
+
+    return root;
+}
+
 function removeDuplicates(arr){
     let newArr = [];
     for (let i = 0; i < arr.length; i++) {
@@ -60,4 +76,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 
 let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]));
 console.log(testArray);
-prettyPrint(buildTree(testArray, 0, testArray.length-1));
+let testRoot = buildTree(testArray, 0, testArray.length-1);
+testRoot = insert(testRoot, 3);
+prettyPrint(testRoot);
