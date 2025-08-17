@@ -91,6 +91,19 @@ function removeDuplicates(arr){
     return newArr;
 }
 
+function find(root, value){
+    if (root.data == value){
+        return root;
+    }else if (value < root.data){
+        return find(root.left, value);
+    }else if (value > root.data){
+        return find(root.right, value);
+    }
+
+    //Returns null if value is not in tree
+    return null;
+}
+
 function sortArray(arr){
     return arr.sort((a, b) => a - b);
 }
@@ -111,5 +124,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]));
 console.log(testArray);
 let testRoot = buildTree(testArray, 0, testArray.length-1);
-testRoot = deleteItem(testRoot, 67);
+testRoot = find(testRoot, 4123)
 prettyPrint(testRoot);
