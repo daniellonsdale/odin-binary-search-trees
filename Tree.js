@@ -108,11 +108,26 @@ function sortArray(arr){
     return arr.sort((a, b) => a - b);
 }
 
-function levelOrderForEach(callback){
+function levelOrderForEach(root, callback){
     if (typeof callback !== 'function'){
         throw new Error("No callback function provided!");
     }
-    
+    if (root == null){
+        return;
+    }
+    let queue = [];
+    queue.push(root);
+    while (queue.length !== 0){
+        let curr = queue[0];
+        callback(curr);
+        if (curr.left !== null){
+            queue.push(curr.left);
+        }
+        if (curr.right !== null){
+            queue.push(curr.right);
+        }
+        queue.shift();
+    }
 }
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -131,5 +146,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]));
 console.log(testArray);
 let testRoot = buildTree(testArray, 0, testArray.length-1);
-testRoot = find(testRoot, 4123)
+levelOrderForEach(testRoot, (e) => {console.log(e.data*2)});
 prettyPrint(testRoot);
