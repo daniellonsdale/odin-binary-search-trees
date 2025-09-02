@@ -108,6 +108,13 @@ function sortArray(arr){
     return arr.sort((a, b) => a - b);
 }
 
+function levelOrderForEach(callback){
+    if (typeof callback !== 'function'){
+        throw new Error("No callback function provided!");
+    }
+    
+}
+
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return;
