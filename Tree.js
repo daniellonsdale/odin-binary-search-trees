@@ -130,6 +130,42 @@ function levelOrderForEach(root, callback){
     }
 }
 
+function inOrderForEach(root, callback){
+    if (typeof callback !== 'function'){
+        throw new Error("No callback function provided!");
+    }
+    if (root == null){
+        return;
+    }
+    inOrderForEach(root.left, callback);
+    callback(root);
+    inOrderForEach(root.right, callback);
+}
+
+function preOrderForEach(root, callback){
+    if (typeof callback !== 'function'){
+        throw new Error("No callback function provided!");
+    }
+    if (root == null){
+        return;
+    }
+    callback(root);
+    preOrderForEach(root.left, callback);
+    preOrderForEach(root.right, callback);
+}
+
+function postOrderForEach(root, callback){
+    if (typeof callback !== 'function'){
+        throw new Error("No callback function provided!");
+    }
+    if (root == null){
+        return;
+    }
+    postOrderForEach(root.left, callback);
+    postOrderForEach(root.right, callback);
+    callback(root);
+}
+
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return;
@@ -146,5 +182,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]));
 console.log(testArray);
 let testRoot = buildTree(testArray, 0, testArray.length-1);
-levelOrderForEach(testRoot, (e) => {console.log(e.data*2)});
+inOrderForEach(testRoot, (e) => {console.log(e.data*2)});
 prettyPrint(testRoot);
