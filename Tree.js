@@ -105,6 +105,20 @@ function find(root, value){
     }
 }
 
+function depth(root, value){
+    if (root == null){
+        throw new Error("Your requested value is not in the tree!");
+    }
+
+    if (root.data == value){
+        return 0;
+    }else if (value < root.data){
+        return 1 + depth(root.left, value);
+    }else if (value > root.data){
+        return 1 + depth(root.right, value);
+    }
+}
+
 function height(root, value){
     if (find(root, value) !== null){
         let foundNode = find(root, value);
@@ -208,4 +222,4 @@ let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67
 console.log(testArray);
 let testRoot = buildTree(testArray, 0, testArray.length-1);
 prettyPrint(testRoot);
-console.log(height(testRoot, 8572));
+console.log(depth(testRoot, 324));
