@@ -92,6 +92,10 @@ function removeDuplicates(arr){
 }
 
 function find(root, value){
+    if (root == null){
+        return null;
+    }
+
     if (root.data == value){
         return root;
     }else if (value < root.data){
@@ -99,9 +103,30 @@ function find(root, value){
     }else if (value > root.data){
         return find(root.right, value);
     }
+}
 
-    //Returns null if value is not in tree
-    return null;
+function height(root, value){
+    if (find(root, value) !== null){
+        let foundNode = find(root, value);
+        return heightHelper(foundNode);
+    }else{
+        return null;
+    }
+}
+
+function heightHelper(root){
+    if (root == null){
+        return -1;
+    }
+
+    let leftHeight = 1 + heightHelper(root.left);
+    let rightHeight = 1 + heightHelper(root.right);
+
+    if (leftHeight > rightHeight){
+        return leftHeight;
+    }else{
+        return rightHeight;
+    }
 }
 
 function sortArray(arr){
@@ -182,5 +207,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]));
 console.log(testArray);
 let testRoot = buildTree(testArray, 0, testArray.length-1);
-inOrderForEach(testRoot, (e) => {console.log(e.data*2)});
 prettyPrint(testRoot);
+console.log(height(testRoot, 8572));
