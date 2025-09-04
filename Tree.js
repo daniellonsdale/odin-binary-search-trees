@@ -261,3 +261,25 @@ function randomNumberArray(){
     return randomArray;
 }
 
+let testingArray = sortArray(removeDuplicates(randomNumberArray()));
+let testingRoot = buildTree(testingArray, 0, testingArray.length - 1);
+prettyPrint(testingRoot);
+levelOrderForEach(testingRoot, (e) => {console.log(e.data)});
+preOrderForEach(testingRoot, (e) => {console.log(e.data)});
+postOrderForEach(testingRoot, (e) => {console.log(e.data)});
+inOrderForEach(testingRoot, (e) => {console.log(e.data)});
+insert(testingRoot, 101);
+insert(testingRoot, 102);
+insert(testingRoot, 103);
+insert(testingRoot, 104);
+insert(testingRoot, 105);
+insert(testingRoot, 106);
+prettyPrint(testingRoot);
+console.log(isBalanced(testingRoot));
+let balancedRoot = rebalance(testingRoot);
+prettyPrint(balancedRoot);
+console.log(isBalanced(balancedRoot));
+levelOrderForEach(balancedRoot, (e) => {console.log(e.data)});
+preOrderForEach(balancedRoot, (e) => {console.log(e.data)});
+postOrderForEach(balancedRoot, (e) => {console.log(e.data)});
+inOrderForEach(balancedRoot, (e) => {console.log(e.data)});
