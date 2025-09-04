@@ -253,3 +253,11 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 // console.log(isBalanced(testRoot));
 // rebalance(testRoot);
 
+function randomNumberArray(){
+    let randomArray = [];
+    for (let i = 0; i < 50; i++){
+        randomArray.push(Math.floor(Math.random() * 100));
+    }
+    return randomArray;
+}
+
