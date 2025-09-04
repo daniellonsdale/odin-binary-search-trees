@@ -119,6 +119,20 @@ function depth(root, value){
     }
 }
 
+function isBalanced(root){
+    if (root == null){
+        return true;
+    }
+
+    if (heightHelper(root.left) - heightHelper(root.right) > 1 || heightHelper(root.left) - heightHelper(root.right) < -1){
+        return false;
+    }
+
+    if(isBalanced(root.left) && isBalanced(root.right)){
+        return true;
+    }
+}
+
 function height(root, value){
     if (find(root, value) !== null){
         let foundNode = find(root, value);
@@ -222,4 +236,8 @@ let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67
 console.log(testArray);
 let testRoot = buildTree(testArray, 0, testArray.length-1);
 prettyPrint(testRoot);
-console.log(depth(testRoot, 324));
+console.log(isBalanced(testRoot));
+insert(testRoot, 4444444);
+insert(testRoot, 4444445);
+prettyPrint(testRoot);
+console.log(isBalanced(testRoot));
