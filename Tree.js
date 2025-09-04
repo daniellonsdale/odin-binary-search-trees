@@ -133,6 +133,16 @@ function isBalanced(root){
     }
 }
 
+function rebalance(root){
+    let treeArray = [];
+    inOrderForEach(root, (e) => {
+        treeArray.push(e.data);
+    });
+    let filteredArray = sortArray(removeDuplicates(treeArray));
+    let newRoot = buildTree(filteredArray, 0, filteredArray.length-1);
+    return newRoot;
+}
+
 function height(root, value){
     if (find(root, value) !== null){
         let foundNode = find(root, value);
@@ -232,12 +242,14 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]));
-console.log(testArray);
-let testRoot = buildTree(testArray, 0, testArray.length-1);
-prettyPrint(testRoot);
-console.log(isBalanced(testRoot));
-insert(testRoot, 4444444);
-insert(testRoot, 4444445);
-prettyPrint(testRoot);
-console.log(isBalanced(testRoot));
+// let testArray = sortArray(removeDuplicates([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]));
+// console.log(testArray);
+// let testRoot = buildTree(testArray, 0, testArray.length-1);
+// prettyPrint(testRoot);
+// console.log(isBalanced(testRoot));
+// insert(testRoot, 4444444);
+// insert(testRoot, 4444445);
+// prettyPrint(testRoot);
+// console.log(isBalanced(testRoot));
+// rebalance(testRoot);
+
